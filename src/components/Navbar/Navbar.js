@@ -5,7 +5,7 @@ import Hamburger from 'hamburger-react';
 const Navbar = () => {
     const [isOpen, setOpen] = useState(false);
     return (
-        <nav className="bg-gray-800">
+        <nav className="bg-slate-800/70 backdrop-blur">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-center md:justify-between">
                     <div className="flex items-center sm:hidden">
@@ -30,34 +30,34 @@ const Navbar = () => {
                                     Dashboard
                                 </a>
 
-                                <a
-                                    href="#"
+                                <Link
+                                    to="/template"
                                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                 >
-                                    Team
-                                </a>
+                                    Template
+                                </Link>
 
-                                <a
-                                    href="#"
+                                <Link
+                                    to="/login"
                                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                 >
-                                    Projects
-                                </a>
+                                    Login
+                                </Link>
 
-                                <a
-                                    href="#"
+                                <Link
+                                    to="/Register"
                                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                 >
-                                    Calendar
-                                </a>
+                                    Register
+                                </Link>
                             </div>
                         </div>
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <div className="flex justify-center">
-                            <div className="dropdown relative">
+                            <div className="dropdown relative text-center">
                                 <a
-                                    className="dropdown-toggle h-12 w-12 rounded-full bg-blue-600 text-white font-medium text-xs leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg active:text-white transition duration-150 ease-in-out  flex items-center whitespace-nowrap "
+                                    className="dropdown-toggle h-12 w-12 rounded-full z-50 bg-blue-600 text-white text-center font-medium text-xs leading-tight uppercase  shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg active:text-white transition duration-150 ease-in-out  flex items-center whitespace-nowrap justify-center"
                                     href="#"
                                     type="button"
                                     id="dropdownMenuButton2"
@@ -65,7 +65,7 @@ const Navbar = () => {
                                     aria-expanded="false"
                                 >
                                     User
-                                    <svg
+                                    {/* <svg
                                         aria-hidden="true"
                                         focusable="false"
                                         data-prefix="fas"
@@ -79,10 +79,10 @@ const Navbar = () => {
                                             fill="currentColor"
                                             d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
                                         ></path>
-                                    </svg>
+                                    </svg> */}
                                 </a>
                                 <ul
-                                    className="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1
+                                    className="dropdown-menu min-w-max absolute hidden bg-slate-600 text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1
          m-0 bg-clip-padding  border-none"
                                     aria-labelledby="dropdownMenuButton2"
                                 >
