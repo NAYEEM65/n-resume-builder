@@ -1,27 +1,37 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Layout from '../../Layout/Layout';
 import axios from 'axios';
-import { Notify } from 'notiflix';
+import { Loading, Notify } from 'notiflix';
+import { AuthContext } from '../../context/authContext';
+import { useNavigate } from 'react-router-dom';
 const Register = () => {
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [isShowCPassword, setIsShowCPassword] = useState(false);
+    const { user, loading, setLoading, createUser } = useContext(AuthContext);
     const [userInfo, setUserInfo] = useState({
         name: '',
         email: '',
         password: '',
         confirmPassword: '',
     });
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         if (userInfo.password === userInfo.confirmPassword) {
-            try {
-                await axios.post('/api/register', userInfo);
-                Notify.success('Registration Success');
-            } catch (error) {
-                Notify.failure('failed to register');
-            }
+            setLoading(true);
+            e.preventDefault();
+            createUser(userInfo)
+                .then(() => {
+                    navigate('/');
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         } else {
             Notify.warning('password does not match');
+            setLoading(false);
         }
     };
     const handelePassShow = () => {
@@ -122,6 +132,7 @@ const Register = () => {
             </button>
         );
     }
+
     return (
         <Layout>
             <div className="bg-grey-lighter min-h-screen flex flex-col">

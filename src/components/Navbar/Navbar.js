@@ -1,9 +1,29 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Hamburger from 'hamburger-react';
+import { AuthContext } from '../../context/authContext';
+import axios from 'axios';
+import { Notify } from 'notiflix';
+
 const Navbar = () => {
     const [isOpen, setOpen] = useState(false);
+    const { user, setUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    console.log(user);
+
+    const handleLogout = () => {
+        axios
+            .get('/api/logout')
+            .then(() => {
+                Notify.success('Successfully logged out.');
+                setUser('');
+                navigate('/login');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     return (
         <nav className="bg-slate-800/70 backdrop-blur">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -36,20 +56,30 @@ const Navbar = () => {
                                 >
                                     Template
                                 </Link>
+                                {user ? (
+                                    <button
+                                        onClick={handleLogout}
+                                        className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                    >
+                                        Logout
+                                    </button>
+                                ) : (
+                                    <>
+                                        <Link
+                                            to="/login"
+                                            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                        >
+                                            Login
+                                        </Link>
 
-                                <Link
-                                    to="/login"
-                                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                                >
-                                    Login
-                                </Link>
-
-                                <Link
-                                    to="/Register"
-                                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                                >
-                                    Register
-                                </Link>
+                                        <Link
+                                            to="/Register"
+                                            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                        >
+                                            Register
+                                        </Link>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -82,13 +112,13 @@ const Navbar = () => {
                                     </svg> */}
                                 </a>
                                 <ul
-                                    className="dropdown-menu min-w-max absolute hidden bg-slate-600 text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1
+                                    className="dropdown-menu min-w-max absolute hidden bg-slate-200 text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1
          m-0 bg-clip-padding  border-none"
                                     aria-labelledby="dropdownMenuButton2"
                                 >
                                     <li>
                                         <Link
-                                            to="/"
+                                            to="/profile"
                                             className=" dropdown-item  text-sm py-2  px-4 font-normal block whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100"
                                         >
                                             Your Profile

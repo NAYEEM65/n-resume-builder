@@ -1,22 +1,39 @@
 import axios from 'axios';
 import { Notify } from 'notiflix';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/authContext';
 import Layout from '../../Layout/Layout';
 const Login = () => {
     const [isShowPassword, setIsShowPassword] = useState(false);
+    const { user, setUser, loading, setLoading, signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState({
         email: '',
         password: '',
     });
     const handleLogin = async (e) => {
+        setLoading(true);
         e.preventDefault();
         try {
             const user = await axios.post('/api/login', userInfo);
             Notify.success('login Success');
-            localStorage.setItem('user', JSON.stringify(user));
+            setLoading(false);
+            setUser(user);
+            navigate('/');
         } catch (error) {
             Notify.failure('failed to login');
+            setLoading(false);
         }
+        // signIn(userInfo)
+        //     .then((data) => {
+        //         console.log(data);
+        //         navigate('/');
+        //         setLoading(false);
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     });
     };
     const handelePassShow = () => {
         setIsShowPassword(!isShowPassword);
@@ -67,6 +84,7 @@ const Login = () => {
             </span>
         );
     }
+
     return (
         <Layout>
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
