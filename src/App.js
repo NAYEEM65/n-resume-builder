@@ -7,8 +7,9 @@ import Home from './components/Home/Home';
 import Profile from './components/User/Profile';
 import PrivateRoute from './components/ProtectedRoute/PrivateRoute';
 import LoggedInRoute from './components/ProtectedRoute/LoggedInRoute';
-import Template from './components/Template/Template';
 import 'antd/dist/antd';
+import Templates from './pages/Template/Templates';
+import Template from './pages/Template/Template';
 function App() {
     return (
         <Routes>
@@ -39,6 +40,14 @@ function App() {
             />
             <Route
                 path="/template"
+                element={
+                    <PrivateRoute>
+                        <Templates />
+                    </PrivateRoute>
+                }
+            />
+            <Route
+                path="/template/:id"
                 element={
                     <PrivateRoute>
                         <Template />

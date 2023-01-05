@@ -13,7 +13,6 @@ function Profile() {
     const { user } = useContext(AuthContext);
     const onFinish = async (values) => {
         setLoading(true);
-        console.log(values);
         try {
             const result = await axios.post('/api/update-profile', {
                 ...values,
