@@ -36,7 +36,10 @@ const Navbar = () => {
                     </div>
                     <div className="flex flex-1 items-center sm:justify-around">
                         <div className="flex flex-shrink-0 items-center">
-                            <NavLink to="/" className="font-semibold text-white md:text-xl text-lg">
+                            <NavLink
+                                to="/"
+                                className="font-semibold text-white md:text-3xl text-lg"
+                            >
                                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500">
                                     N-Res
                                 </span>

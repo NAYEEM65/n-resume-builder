@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
 import Layout from '../../Layout/Layout';
-import axios from 'axios';
-import { Loading, Notify } from 'notiflix';
+import { Notify } from 'notiflix';
 import { AuthContext } from '../../context/authContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Spin } from 'antd';
 const Register = () => {
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [isShowCPassword, setIsShowCPassword] = useState(false);
-    const { user, loading, setLoading, createUser } = useContext(AuthContext);
+    const { loading, setLoading, createUser } = useContext(AuthContext);
     const [userInfo, setUserInfo] = useState({
         name: '',
         email: '',
@@ -23,7 +23,7 @@ const Register = () => {
             e.preventDefault();
             createUser(userInfo)
                 .then(() => {
-                    navigate('/');
+                    navigate('/login');
                     setLoading(false);
                 })
                 .catch((err) => {
@@ -44,7 +44,7 @@ const Register = () => {
     let cpassEye;
     if (isShowPassword) {
         passEye = (
-            <button onClick={handelePassShow} className="absolute right-3 top-3">
+            <span onClick={handelePassShow} className="absolute right-3 cursor-pointer top-3">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -64,12 +64,12 @@ const Register = () => {
                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                 </svg>
-            </button>
+            </span>
         );
     }
     if (!isShowPassword) {
         passEye = (
-            <button onClick={handelePassShow} className="absolute right-3 top-3">
+            <span onClick={handelePassShow} className="absolute cursor-pointer right-3 top-3">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -84,12 +84,12 @@ const Register = () => {
                         d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"
                     />
                 </svg>
-            </button>
+            </span>
         );
     }
     if (isShowCPassword) {
         cpassEye = (
-            <button onClick={handeleCPassShow} className="absolute right-3 top-3">
+            <span onClick={handeleCPassShow} className="absolute cursor-pointer right-3 top-3">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -109,12 +109,12 @@ const Register = () => {
                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                 </svg>
-            </button>
+            </span>
         );
     }
     if (!isShowCPassword) {
         cpassEye = (
-            <button onClick={handeleCPassShow} className="absolute right-3 top-3">
+            <span onClick={handeleCPassShow} className="absolute cursor-pointer right-3 top-3">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -129,13 +129,18 @@ const Register = () => {
                         d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"
                     />
                 </svg>
-            </button>
+            </span>
         );
     }
 
     return (
         <Layout>
             <div className="bg-grey-lighter min-h-screen flex flex-col">
+                {loading && (
+                    <Spin tip="Loading" size="small">
+                        <div className="content" />
+                    </Spin>
+                )}
                 <div className="container max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2 relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl -z-10"></div>
                     <div className="bg-white px-6 py-8 rounded shadow-lg text-black w-full">
@@ -161,7 +166,7 @@ const Register = () => {
 
                             <div className="relative">
                                 <input
-                                    type="password"
+                                    type={`${isShowPassword ? 'text' : 'password'}`}
                                     className="block border border-grey-light w-full p-3 rounded mb-4"
                                     name="password"
                                     placeholder="Password"
@@ -173,7 +178,7 @@ const Register = () => {
                             </div>
                             <div className="relative">
                                 <input
-                                    type="password"
+                                    type={`${isShowCPassword ? 'text' : 'password'}`}
                                     className="block border border-grey-light w-full p-3 rounded mb-4"
                                     name="confirm_password"
                                     placeholder="Confirm Password"
@@ -212,28 +217,30 @@ const Register = () => {
 
                         <div className="text-center text-sm text-grey-dark mt-4">
                             By signing up, you agree to the
-                            <a
+                            <Link
                                 className="no-underline border-b border-grey-dark text-grey-dark"
-                                href="#"
+                                to="/tos"
                             >
                                 Terms of Service
-                            </a>{' '}
+                            </Link>{' '}
                             and
-                            <a
+                            <Link
                                 className="no-underline border-b border-grey-dark text-grey-dark"
-                                href="#"
+                                to="/tos"
                             >
                                 Privacy Policy
-                            </a>
+                            </Link>
                         </div>
-                    </div>
-
-                    <div className="text-grey-dark mt-6">
-                        Already have an account?
-                        <a className="no-underline border-b border-blue text-blue" href="../login/">
-                            Log in
-                        </a>
-                        .
+                        <div className="text-grey-dark mt-6 text-center">
+                            Already have an account?
+                            <Link
+                                className="no-underline border-b border-blue text-blue-500"
+                                to="/login"
+                            >
+                                Log in
+                            </Link>
+                            .
+                        </div>
                     </div>
                 </div>
             </div>

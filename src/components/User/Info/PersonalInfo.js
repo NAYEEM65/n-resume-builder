@@ -1,6 +1,5 @@
 import { Form, Input } from 'antd';
 import React from 'react';
-
 const { TextArea } = Input;
 
 function PersonalInfo() {
@@ -8,12 +7,7 @@ function PersonalInfo() {
         <div>
             <div className="grid md:grid-cols-4 md:gap-6 ">
                 <div className="col-md-4">
-                    <Form.Item name="firstName" label="First Name" rules={[{ required: true }]}>
-                        <Input />
-                    </Form.Item>
-                </div>
-                <div className="col-md-4">
-                    <Form.Item name="lastName" label="Last Name" rules={[{ required: true }]}>
+                    <Form.Item name="name" label="Full Name" rules={[{ required: true }]}>
                         <Input />
                     </Form.Item>
                 </div>
@@ -32,7 +26,7 @@ function PersonalInfo() {
                     </Form.Item>
                 </div>
                 <div className="col-md-4">
-                    <Form.Item name="portfolio" label="Portfolio" rules={[{ required: true }]}>
+                    <Form.Item name="portfolio" label="Portfolio">
                         <Input />
                     </Form.Item>
                 </div>

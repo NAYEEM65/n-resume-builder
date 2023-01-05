@@ -36,12 +36,12 @@ const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        const user = async () => {
-            const user = await axios.get('/api/user-details');
-            setUser(user.data.user);
+        const userInfo = async () => {
+            const userdata = await axios.get('/api/user-details');
+            setUser(userdata.data.user);
         };
-        user();
-    }, []);
+        userInfo();
+    }, [loading]);
     const logOut = () => {
         setLoading(true);
         axios

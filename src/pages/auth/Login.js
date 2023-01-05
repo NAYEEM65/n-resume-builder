@@ -1,12 +1,13 @@
+import { Spin } from 'antd';
 import axios from 'axios';
 import { Notify } from 'notiflix';
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
 import Layout from '../../Layout/Layout';
 const Login = () => {
     const [isShowPassword, setIsShowPassword] = useState(false);
-    const { user, setUser, loading, setLoading, signIn } = useContext(AuthContext);
+    const { setUser, loading, setLoading } = useContext(AuthContext);
     const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState({
         email: '',
@@ -20,20 +21,11 @@ const Login = () => {
             Notify.success('login Success');
             setLoading(false);
             setUser(user);
-            navigate('/');
+            navigate('/profile');
         } catch (error) {
             Notify.failure('failed to login');
             setLoading(false);
         }
-        // signIn(userInfo)
-        //     .then((data) => {
-        //         console.log(data);
-        //         navigate('/');
-        //         setLoading(false);
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     });
     };
     const handelePassShow = () => {
         setIsShowPassword(!isShowPassword);
@@ -88,27 +80,26 @@ const Login = () => {
     return (
         <Layout>
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                {loading && (
+                    <Spin tip="Loading" size="large">
+                        <div className="content" />
+                    </Spin>
+                )}
                 <div className="w-full max-w-md space-y-8 relative z-10">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl -z-10"></div>
                     <div className="bg-white rounded p-4 relative z-0">
-                        <div>
-                            <img
-                                className="mx-auto h-12 w-auto"
-                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                alt="Your Company"
-                            />
+                        <div className="py-8">
+                            <div className="flex flex-shrink-0 items-center justify-center">
+                                <p className="font-semibold text-slate-700 md:text-2xl text-lg">
+                                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500">
+                                        N-Res
+                                    </span>
+                                    ume Builder
+                                </p>
+                            </div>
                             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
                                 Sign in to your account
                             </h2>
-                            <p className="mt-2 text-center text-sm text-gray-600">
-                                Or
-                                <a
-                                    href="#"
-                                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                                >
-                                    start your 14-day free trial
-                                </a>
-                            </p>
                         </div>
                         <form onSubmit={handleLogin}>
                             <input
@@ -123,7 +114,7 @@ const Login = () => {
 
                             <div className="relative">
                                 <input
-                                    type="password"
+                                    type={`${isShowPassword ? 'text' : 'password'}`}
                                     className="block border border-grey-light w-full p-3 rounded mb-4"
                                     name="password"
                                     placeholder="Password"
@@ -156,6 +147,16 @@ const Login = () => {
                                 Login
                             </button>
                         </form>
+                        <div className="text-grey-dark mt-6">
+                            Don't have an account?
+                            <Link
+                                className="no-underline border-b border-blue text-blue-500"
+                                to="/register"
+                            >
+                                Register Now
+                            </Link>
+                            .
+                        </div>
                     </div>
                 </div>
             </div>
