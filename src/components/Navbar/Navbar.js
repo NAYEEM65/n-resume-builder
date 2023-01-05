@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext, useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Hamburger from 'hamburger-react';
 import { AuthContext } from '../../context/authContext';
 import axios from 'axios';
@@ -10,8 +10,10 @@ const Navbar = () => {
     const [isOpen, setOpen] = useState(false);
     const { user, setUser } = useContext(AuthContext);
     const navigate = useNavigate();
-    console.log(user);
-
+    const location = useLocation();
+    const { pathname } = location;
+    const splitLocation = pathname.split('/');
+    const activeClass = (state) => (state.isActive ? `bg-gray-900 text-slate-200` : '');
     const handleLogout = () => {
         axios
             .get('/api/logout')
@@ -24,6 +26,7 @@ const Navbar = () => {
                 console.log(err);
             });
     };
+    console.log(user);
     return (
         <nav className="bg-slate-800/70 backdrop-blur">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -42,42 +45,59 @@ const Navbar = () => {
                         </div>
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-4">
-                                <a
-                                    href="#"
-                                    className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                                <NavLink
+                                    to="/"
+                                    className={`${
+                                        splitLocation[1] === '' ? ' bg-gray-900 text-slate-200' : ''
+                                    } px-3 py-2 rounded-md text-sm font-medium`}
                                     aria-current="page"
                                 >
-                                    Dashboard
-                                </a>
+                                    Home
+                                </NavLink>
 
                                 <Link
                                     to="/template"
-                                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                    className={`${activeClass} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                                 >
                                     Template
                                 </Link>
+                                <Link
+                                    to="/dashboard"
+                                    className={`${activeClass} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                                >
+                                    Dashboard
+                                </Link>
                                 {user ? (
-                                    <button
-                                        onClick={handleLogout}
-                                        className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                                    >
-                                        Logout
-                                    </button>
+                                    <>
+                                        {' '}
+                                        <NavLink
+                                            to="/profile"
+                                            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                        >
+                                            Profile
+                                        </NavLink>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                        >
+                                            Logout
+                                        </button>
+                                    </>
                                 ) : (
                                     <>
-                                        <Link
+                                        <NavLink
                                             to="/login"
                                             className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                         >
                                             Login
-                                        </Link>
+                                        </NavLink>
 
-                                        <Link
+                                        <NavLink
                                             to="/Register"
                                             className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                         >
                                             Register
-                                        </Link>
+                                        </NavLink>
                                     </>
                                 )}
                             </div>
