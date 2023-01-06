@@ -111,7 +111,7 @@ function ExperienceProjects() {
                     <>
                         <div className="row">
                             {fields.map(({ key, name, ...restField }) => (
-                                <div className="grid md:grid-cols-4 md:gap-6" key={key}>
+                                <div className="grid md:grid-cols-5 md:gap-6" key={key}>
                                     <div className="col-md-4">
                                         <Form.Item
                                             {...restField}
@@ -133,6 +133,16 @@ function ExperienceProjects() {
                                             <TextArea placeholder="Description" />
                                         </Form.Item>
                                     </div>
+                                    <div className="col-md-2">
+                                        <Form.Item
+                                            {...restField}
+                                            name={[name, 'link']}
+                                            rules={[{ required: true, message: 'Missing link' }]}
+                                        >
+                                            <Input placeholder="Link" />
+                                        </Form.Item>
+                                    </div>
+
                                     <div className="col-md-2">
                                         <Form.Item
                                             {...restField}

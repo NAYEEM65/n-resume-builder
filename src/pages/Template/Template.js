@@ -21,6 +21,8 @@ function Template() {
             case '2': {
                 return <Template2 />;
             }
+            default:
+                return;
         }
     };
     return (
@@ -34,7 +36,7 @@ function Template() {
                         Print
                     </Button>
                 </div>
-                <div className="px-12" ref={componentRef}>
+                <div className="px-12 h-[100%] bg-white" ref={componentRef}>
                     {gettemplate()}
                 </div>
             </div>

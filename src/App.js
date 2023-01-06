@@ -10,6 +10,7 @@ import LoggedInRoute from './components/ProtectedRoute/LoggedInRoute';
 import 'antd/dist/antd';
 import Templates from './pages/Template/Templates';
 import Template from './pages/Template/Template';
+import Dashboard from './pages/Dashboard/Dashboard';
 function App() {
     return (
         <Routes>
@@ -51,6 +52,14 @@ function App() {
                 element={
                     <PrivateRoute>
                         <Template />
+                    </PrivateRoute>
+                }
+            />
+            <Route
+                path="/dashboard"
+                element={
+                    <PrivateRoute>
+                        <Dashboard />
                     </PrivateRoute>
                 }
             />
