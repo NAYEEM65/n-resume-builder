@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, Form, message, Spin, Tabs } from 'antd';
+import { Button, Form, message, Tabs } from 'antd';
 import axios from 'axios';
 import Layout from '../../Layout/Layout';
 import PersonalInfo from './Info/PersonalInfo';
@@ -7,6 +7,7 @@ import SkillsEducation from './Info/SkillsEducation';
 import ExperienceProjects from './Info/Experience';
 import { AuthContext } from '../../context/authContext';
 import { Loading } from 'notiflix';
+import Address from './Info/Address';
 
 function Profile() {
     const [loading, setLoading] = useState(false);
@@ -15,7 +16,7 @@ function Profile() {
     const onFinish = async (values) => {
         setLoading(true);
         try {
-            const result = await axios.post('/api/update-profile', {
+            await axios.post('/api/update-profile', {
                 ...values,
                 _id: user._id,
             });
@@ -53,6 +54,11 @@ function Profile() {
                                 label: `Experience or Projects`,
                                 key: '3',
                                 children: <ExperienceProjects />,
+                            },
+                            {
+                                label: `Additional Info`,
+                                key: '4',
+                                children: <Address />,
                             },
                         ]}
                     />

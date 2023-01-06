@@ -34,7 +34,7 @@ function SkillsEducation() {
                                         </Form.Item>
                                     </div>
 
-                                    <div className="col-md-2">
+                                    <div className="">
                                         <Form.Item
                                             {...restField}
                                             name={[name, 'grade']}
@@ -44,7 +44,7 @@ function SkillsEducation() {
                                         </Form.Item>
                                     </div>
 
-                                    <div className="col-md-3">
+                                    <div className="">
                                         <Form.Item
                                             {...restField}
                                             name={[name, 'institution']}
@@ -55,7 +55,7 @@ function SkillsEducation() {
                                             <Input placeholder="Institution" />
                                         </Form.Item>
                                     </div>
-                                    <div className="col-md-3">
+                                    <div className="">
                                         <Form.Item
                                             {...restField}
                                             name={[name, 'board']}
@@ -64,7 +64,7 @@ function SkillsEducation() {
                                             <Input placeholder="Board eg. Dhaka" />
                                         </Form.Item>
                                     </div>
-                                    <div className="col-md-2">
+                                    <div className="">
                                         <Form.Item
                                             {...restField}
                                             name={[name, 'passingYear']}
@@ -75,9 +75,9 @@ function SkillsEducation() {
                                             <Input placeholder="Passing Year eg. 2015" />
                                         </Form.Item>
                                     </div>
-                                    <div className="w-fit">
+                                    <div className="-mt-5 py-5 md:py-0 md:mt-0 ">
                                         <MinusCircleOutlined
-                                            style={{ fontSize: 25, color: 'tomato' }}
+                                            className="-mt-5 md:-mt-1 text-red-500 text-2xl"
                                             onClick={() =>
                                                 Confirm.show(
                                                     'Please Confirm!',
@@ -127,7 +127,10 @@ function SkillsEducation() {
                     <>
                         <div className="w-full">
                             {fields.map(({ key, name, ...restField }) => (
-                                <div className="flex justify-start items-center gap-2" key={key}>
+                                <div
+                                    className="md:grid md:grid-cols-2 gap-2 flex justify-between md:gap-6"
+                                    key={key}
+                                >
                                     <div className=" w-full">
                                         <Form.Item
                                             {...restField}
@@ -140,21 +143,9 @@ function SkillsEducation() {
                                         </Form.Item>
                                     </div>
 
-                                    {/* <div className="col-md-4">
-                                        <Form.Item
-                                            {...restField}
-                                            name={[name, 'rating']}
-                                            rules={[
-                                                { required: true, message: 'Missing first name' },
-                                            ]}
-                                        >
-                                            <Input placeholder="Rating" />
-                                        </Form.Item>
-                                    </div> */}
-
-                                    <div className="-mt-4">
+                                    <div className="">
                                         <MinusCircleOutlined
-                                            style={{ fontSize: 25, color: 'tomato' }}
+                                            className="-mt-1 text-red-500 text-2xl"
                                             onClick={() =>
                                                 Confirm.show(
                                                     'Please Confirm!',

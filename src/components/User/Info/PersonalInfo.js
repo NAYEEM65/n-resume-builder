@@ -26,6 +26,63 @@ function PersonalInfo() {
                     </Form.Item>
                 </div>
                 <div className="col-md-4">
+                    <Form.Item
+                        name="fathersName"
+                        label="Father's Name"
+                        rules={[{ required: true }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                </div>
+                <div className="col-md-4">
+                    <Form.Item
+                        name="mothersName"
+                        label="Mother's Name"
+                        rules={[{ required: true }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                </div>
+                <div className="col-md-4">
+                    <Form.Item
+                        name="dateOfBirth"
+                        label="Date of Birth"
+                        rules={[{ required: true }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                </div>
+                <div className="col-md-4">
+                    <Form.Item name="sex" label="Sex" rules={[{ required: true }]}>
+                        <Input />
+                    </Form.Item>
+                </div>
+                <div className="col-md-4">
+                    <Form.Item name="blood" label="Blood Group">
+                        <Input />
+                    </Form.Item>
+                </div>
+                <div className="col-md-4">
+                    <Form.Item name="nationality" label="Nationality">
+                        <Input />
+                    </Form.Item>
+                </div>
+                <div className="col-md-4">
+                    <Form.Item name="religion" label="Religion">
+                        <Input />
+                    </Form.Item>
+                </div>
+                <div className="col-md-4">
+                    <Form.Item name="maritalStatus" label="Marital Status">
+                        <Input />
+                    </Form.Item>
+                </div>
+                <div className="col-md-4">
+                    <Form.Item name="nid" label="National ID NO">
+                        <Input />
+                    </Form.Item>
+                </div>
+                <div className="col-md-4">
                     <Form.Item name="portfolio" label="Portfolio">
                         <Input />
                     </Form.Item>

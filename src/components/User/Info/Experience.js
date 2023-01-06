@@ -16,7 +16,7 @@ function ExperienceProjects() {
                         <div className="row">
                             {fields.map(({ key, name, ...restField }) => (
                                 <div className="grid md:grid-cols-5 md:gap-6" key={key}>
-                                    <div className="col-md-3">
+                                    <div className="">
                                         <Form.Item
                                             {...restField}
                                             name={[name, 'company']}
@@ -28,7 +28,7 @@ function ExperienceProjects() {
                                         </Form.Item>
                                     </div>
 
-                                    <div className="col-md-2">
+                                    <div className="">
                                         <Form.Item
                                             {...restField}
                                             name={[name, 'years']}
@@ -38,7 +38,7 @@ function ExperienceProjects() {
                                         </Form.Item>
                                     </div>
 
-                                    <div className="col-md-3">
+                                    <div className="">
                                         <Form.Item
                                             {...restField}
                                             name={[name, 'place']}
@@ -47,7 +47,7 @@ function ExperienceProjects() {
                                             <Input placeholder="Place" />
                                         </Form.Item>
                                     </div>
-                                    <div className="col-md-2">
+                                    <div className="">
                                         <Form.Item
                                             {...restField}
                                             name={[name, 'range']}
@@ -58,9 +58,9 @@ function ExperienceProjects() {
                                             <Input placeholder="Year Range" />
                                         </Form.Item>
                                     </div>
-                                    <div className="col-md-2">
+                                    <div className="-mt-5 py-5 md:py-0 md:mt-0 ">
                                         <MinusCircleOutlined
-                                            style={{ fontSize: 25, color: 'tomato' }}
+                                            className="-mt-1 text-red-500 text-2xl"
                                             onClick={() =>
                                                 Confirm.show(
                                                     'Please Confirm!',
@@ -112,7 +112,7 @@ function ExperienceProjects() {
                         <div className="row">
                             {fields.map(({ key, name, ...restField }) => (
                                 <div className="grid md:grid-cols-5 md:gap-6" key={key}>
-                                    <div className="col-md-4">
+                                    <div className="">
                                         <Form.Item
                                             {...restField}
                                             name={[name, 'title']}
@@ -122,7 +122,7 @@ function ExperienceProjects() {
                                         </Form.Item>
                                     </div>
 
-                                    <div className="col-md-4">
+                                    <div className="">
                                         <Form.Item
                                             {...restField}
                                             name={[name, 'description']}
@@ -133,7 +133,7 @@ function ExperienceProjects() {
                                             <TextArea placeholder="Description" />
                                         </Form.Item>
                                     </div>
-                                    <div className="col-md-2">
+                                    <div className="">
                                         <Form.Item
                                             {...restField}
                                             name={[name, 'link']}
@@ -143,7 +143,7 @@ function ExperienceProjects() {
                                         </Form.Item>
                                     </div>
 
-                                    <div className="col-md-2">
+                                    <div className="">
                                         <Form.Item
                                             {...restField}
                                             name={[name, 'range']}
@@ -155,9 +155,9 @@ function ExperienceProjects() {
                                         </Form.Item>
                                     </div>
 
-                                    <div className="col-md-2">
+                                    <div className="-mt-5 py-5 md:py-0 md:mt-0 ">
                                         <MinusCircleOutlined
-                                            style={{ fontSize: 25, color: 'tomato' }}
+                                            className="-mt-1 text-red-500 text-2xl"
                                             onClick={() =>
                                                 Confirm.show(
                                                     'Please Confirm!',
