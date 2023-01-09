@@ -25,7 +25,7 @@ function Profile() {
             message.success('Profile updated successfully');
         } catch (error) {
             setLoading(false);
-            message.error('Registration failed');
+            message.error('updated  failed');
         }
     };
     return (

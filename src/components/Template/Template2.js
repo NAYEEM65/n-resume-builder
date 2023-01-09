@@ -62,7 +62,7 @@ const Template2 = () => {
                     <h2 className="text-3xl font-bold bg-blue-200 pt-1 pb-2 px-1">
                         <span className="w-fit border-b-2 border-gray-500">Parmanent Address</span>
                     </h2>
-                    {user.permanentAdd.map((add, index) => (
+                    {user.permanentAdd?.map((add, index) => (
                         <div key={index}>
                             <div className="flex justify-between">
                                 <p className="w-[50%] py-1">Village</p>
@@ -89,7 +89,7 @@ const Template2 = () => {
                     <h2 className="text-3xl font-bold bg-blue-200 pt-1 pb-2 px-1">
                         <span className="w-fit border-b-2 border-gray-500">Present Address</span>
                     </h2>
-                    {user.presentAdd.map((add, index) => (
+                    {user.presentAdd?.map((add, index) => (
                         <div key={index}>
                             <div className="flex justify-between">
                                 <p className="w-[50%] py-1">Village</p>
