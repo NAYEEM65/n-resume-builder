@@ -1,5 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
-import { signIn } from "./authSlice";
+import { signIn, updateUser } from "./authSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -59,7 +59,54 @@ export const authApiSlice = apiSlice.injectEndpoints({
         } catch (err) {}
       },
     }),
+    updateUserInfo: builder.mutation({
+      query: (data) => ({
+        url: "/api/update-profile",
+        method: "POST",
+        body: data,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          console.log(result);
+
+          dispatch(
+            updateUser({
+              user: result.data,
+              token: JSON.parse(localStorage.auth).token
+                ? JSON.parse(localStorage.auth).token
+                : null,
+            })
+          );
+        } catch (err) {}
+      },
+    }),
+    getUserDetaile: builder.query({
+      query: () => ({
+        url: "/api/user-details",
+        method: "GET",
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          console.log("from get User Details==>", result);
+          // dispatch(
+          //   updateUser({
+          //     user: result.data,
+          //     token: JSON.parse(localStorage.auth).token
+          //       ? JSON.parse(localStorage.auth).token
+          //       : null,
+          //   })
+          // );
+        } catch (err) {}
+      },
+    }),
   }),
 });
 
-export const { useLoginUserMutation, useRegisterMutation } = authApiSlice;
+export const {
+  useLoginUserMutation,
+  useRegisterMutation,
+  useUpdateUserInfoMutation,
+  useGetUserDetaileQuery,
+} = authApiSlice;

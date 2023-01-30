@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Layout from "../../Layout/Layout";
 import { Notify } from "notiflix";
-import { AuthContext } from "../../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import { Spin } from "antd";
 import { useRegisterMutation } from "../../features/auth/autAPI";
@@ -9,7 +8,6 @@ const Register = () => {
   const [register, { data: user, isLoading, isError }] = useRegisterMutation();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowCPassword, setIsShowCPassword] = useState(false);
-  const { loading, setLoading, createUser } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
@@ -29,7 +27,6 @@ const Register = () => {
       Notify.success("Register success");
     } else {
       Notify.warning("password does not match");
-      setLoading(false);
     }
   };
   const handelePassShow = () => {
@@ -146,7 +143,7 @@ const Register = () => {
   return (
     <Layout>
       <div className="bg-grey-lighter min-h-screen flex flex-col">
-        {loading && (
+        {isLoading && (
           <Spin tip="Loading" size="small">
             <div className="content" />
           </Spin>
